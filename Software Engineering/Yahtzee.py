@@ -16,28 +16,49 @@ def RollOne(diceList):
         diceList.append(RollDice())
     print (diceList)   
 
-def RollTwo(diceList):
-    print("Second")
+def RollAgain(diceList):
+    reroll = int(input("How many dice do you want to re-roll?:"))
+    if(reroll > 5):
+        print("You only have 5 dice, so we'll re-roll them all")
+        reroll = 5
+    elif(reroll < 1):
+        print("I guess you didn't want to re-roll any dice after all")
+        reroll = 0
     
-def RollThree(diceList):
-    print("Third")
+    if(reroll == 5):
+        diceList.clear()
+        for x in range (reroll):
+            diceList.append(RollDice())
+    elif(reroll == 0):
+        print("No dice rolled")
+    else:
+        for x in range(reroll):
+            num = int(input("Which dice do you want re-rolled?:"))
+            while(num < 1 or num > 5):
+                num = int(input("Please put in 1-5: "))
+            diceList[num - 1] = RollDice()
+            
+    print(diceList)
     
 def ScoreCard(diceList):
     print("Score")
     
 def PlayYahtzee():
+    num = int(0)
     for round in range (13):
+        num += 1
+        print("Round:", end = "")
+        print(num)
         RollOne(diceList)
-        answer = input("Do you want to Re-roll any dice? Y or N: ")
+        answer = input("Do you want to re-roll any dice? Y or N: ")
         if('y' in answer or 'Y' in answer):
-            RollTwo(diceList)
-            RollThree(diceList)
-        elif('n' in answer or 'N' in answer):
-            ScoreCard(diceList)
-        else:
-            
-        diceList.clear()
-        
+            RollAgain(diceList)
+            answer = input("Do you want to Re-roll any dice? Y or N: ")
+            if('y' in answer or 'Y' in answer):
+                RollAgain(diceList)
+        ScoreCard(diceList)
+        diceList.clear() 
+
 print("Welcome to Yahtzee")
 name = input("(R)ules or (P)lay? :")
 
