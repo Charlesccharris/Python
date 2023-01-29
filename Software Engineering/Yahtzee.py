@@ -1,8 +1,10 @@
 import random
+played = 0
 diceList = []
 dice = int()
 answer = ""
-score = ["Score Card:", "(1)Aces", "(2)Twos", "(3)Threes", "(4)Fours", "(5)Fives", "(6)Sixes", "(7)3 of a kind", "(8)4 of a kind", "(9)Full House", "(10)Sm Straight (Sequence of 4)", "(11)Lg. Straight (Sequence of 5)", "(12)YAHTZEE (5 of a kind)", "(13)Chance"]
+card = ["Score Card:", "(1)Aces", "(2)Twos", "(3)Threes", "(4)Fours", "(5)Fives", "(6)Sixes", "(7)3 of a kind", "(8)4 of a kind", "(9)Full House", "(10)Sm Straight (Sequence of 4)", "(11)Lg. Straight (Sequence of 5)", "(12)YAHTZEE (5 of a kind)", "(13)Chance"]
+score = []
 
 def Rules():
     print("Rules of Yahtzee")
@@ -40,11 +42,77 @@ def RollAgain(diceList):
             diceList[num - 1] = RollDice()
     print(diceList)
     
-def ScoreCard(diceList, score):
-    for x in score:
+def ScoreCard(diceList, card, score):
+    matched = 0
+    for x in card:
         print(x)
-    score.append("Banana")
+
+    while(matched != 1):
+        choice = input("Choose which category to score: ")
+        match choice:
+            case '1':
+                print("Ace")
+                matched = 1
+            case '2':
+                print("Two")
+                matched = 1
+            case '3':
+                print("Three")
+                matched = 1
+            case '4':
+                print("Four")
+                matched = 1
+            case '5':
+                print("Five")
+                matched = 1
+            case '6':
+                print("Six")
+                matched = 1
+            case '7':
+                print("Seven")
+                matched = 1
+            case '8':
+                print("Eight")
+                matched = 1
+            case '9':
+                print("NIn")
+                matched = 1
+            case '10':
+                print("Ten")
+                matched = 1
+            case '11':
+                print("eleven")
+                matched = 1
+            case '12':
+                print("twelve")
+                matched = 1
+            case '13':
+                print("Thirteen")
+                matched = 1
+            case _:
+                print("Not a valid option")
+                matched = 0
+            
+def ScoreGame(score):
+    counter = int()
+    upper = int()
+    totalScore = int()
     
+    for x in score:
+        if(counter < 6):
+            counter += 1
+            upper += x
+            print("No")
+        totalScore += x
+        
+    if(upper >= 63):
+        totalScore += 35
+        
+    print(totalScore)    
+def FillCard(score):
+    for x in range (13):
+        score.append(-1)
+
 def PlayYahtzee():
     num = int(0)
     for round in range (13):
@@ -58,16 +126,18 @@ def PlayYahtzee():
             answer = input("Do you want to Re-roll any dice? Y or N: ")
             if('y' in answer or 'Y' in answer):
                 RollAgain(diceList)
-        ScoreCard(diceList, score)
+        ScoreCard(diceList, card, score)
         diceList.clear() 
-    ScoreGame(ScoreCard)
+    ScoreGame(score)
 
-print("Welcome to Yahtzee")
-name = input("(R)ules or (P)lay? :")
-
-if('r' in name or 'R' in name):
-    Rules()
-elif('p' in name or 'P' in name):
-    PlayYahtzee()
-else:
-    print("That is not a valid option")
+while(played != 1):
+    print("Welcome to Yahtzee")
+    name = input("(R)ules or (P)lay? :")
+    if('r' in name or 'R' in name):
+        Rules()
+    elif('p' in name or 'P' in name):
+        FillCard(score)
+        PlayYahtzee()
+        played = 1
+    else:
+        print("That is not a valid option")
