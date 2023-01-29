@@ -44,50 +44,78 @@ def RollAgain(diceList):
     
 def ScoreCard(diceList, card, score):
     matched = 0
+    size = len(diceList)
     for x in card:
         print(x)
-
+    diceList.sort()
+    
     while(matched != 1):
         choice = input("Choose which category to score: ")
         match choice:
             case '1':
-                print("Ace")
-                matched = 1
+                if 1 in diceList:
+                    print("Yes")
+                    matched = 1
+                else:
+                    print("Sorry, you don't have any Ones")
             case '2':
-                print("Two")
-                matched = 1
+                if 2 in diceList:
+                    print("Yes")
+                    matched = 1
+                else:
+                    print("Sorry, you don't have any Twos")
             case '3':
-                print("Three")
-                matched = 1
+                if 3 in diceList:
+                    print("Yes")
+                    matched = 1
+                else:
+                    print("Sorry, You don't have any Threes")
             case '4':
-                print("Four")
-                matched = 1
+                if 4 in diceList:
+                    print("Yes")
+                    matched = 1
+                else:
+                    print("Sorry, you don't have any Fours")
             case '5':
-                print("Five")
-                matched = 1
+                if 5 in diceList:
+                    print("Yes")
+                    matched = 1
+                else:
+                    print("Sorry, you don't have any Fives")
             case '6':
-                print("Six")
-                matched = 1
+                if 6 in diceList:
+                    print("Yes")
+                    matched = 1
+                else:
+                    print("Sorry, you don't have any Sixes")
             case '7':
-                print("Seven")
-                matched = 1
+                for i in range(size - 2):
+                    if diceList[i] == diceList[i + 1] and diceList[i + 1] == diceList[i + 2]:
+                        print("Yes")
+                        matched = 1
+                    else:
+                        print("Sorry, you don't have Three of a Kind")
             case '8':
-                print("Eight")
-                matched = 1
+                for i in range(size - 3):
+                    if diceList[i] == diceList[i + 1] and diceList[i + 1] == diceList[i + 2] and diceList[i + 2] == diceList[1 + 3]:
+                        print("Yes")
+                        matched = 1
+                    else:
+                        print("Sorry, you don't have Four of a Kind")
             case '9':
-                print("NIn")
+                print("Sorry, you don't have a Full House")
                 matched = 1
             case '10':
-                print("Ten")
+                print("Sorry, you don't have a Small Straight")
                 matched = 1
             case '11':
-                print("eleven")
+                print("Sorry, you don't have a Large Straight")
                 matched = 1
             case '12':
-                print("twelve")
+                print("Sorry, you don't have a YAHTZEE")
                 matched = 1
             case '13':
-                print("Thirteen")
+                print("Chance")
                 matched = 1
             case _:
                 print("Not a valid option")
